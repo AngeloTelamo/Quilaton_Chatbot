@@ -179,7 +179,7 @@ class ChatbotSteps extends React.Component {
           id: 'option',
           options:[
            { value: 'Menu', label: "Back to Menu", trigger: "menu" },
-           { value: 'Chat to Atty', label: "Chat to Atty", trigger: "chatAtty" },
+           { value: 'Chat to Atty', label: "Chat to Attorney", trigger: "chatAtty" },
            { value: 'End', label: "End Session", trigger: "End_Session" },
           ]
         },
@@ -236,7 +236,6 @@ class ChatbotSteps extends React.Component {
         },
   
         {
-  
           id: 'write_Concern',
           message: 'Please write your concern or message:',
           trigger: 'concern',
@@ -245,14 +244,26 @@ class ChatbotSteps extends React.Component {
         {
           id: 'concern',
           user: true,
-          trigger: 'submit',
+          trigger: '7',
         },
-  
+
         {
-          id: 'submit',
+          id: '7',
+          message: 'Great! Check out your summary',
+          trigger: 'review',
+        },
+
+        {
+          id: 'review',
           component: <Post />,
           asMessage: true,
-          end: true,
+          trigger: 'end-message'
+        },
+
+        {
+          id: 'end-message',
+          message: 'Thanks! Your data was submitted successfully!',
+          trigger: 'mains',
         },
 
       ];
