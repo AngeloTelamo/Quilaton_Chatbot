@@ -43,12 +43,12 @@ const ChatComponents = () => {
     <div style={{
       position: 'fixed',
       bottom: '-40%', 
-      left: '45%',// Adjust the distance from the bottom
+      left: '45%',
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      height: '100vh', // Set the height of the container to 100vh
+      height: '100vh', 
     }}>
       <Segment>
         <ThemeProvider theme={theme}>
