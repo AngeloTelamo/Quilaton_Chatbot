@@ -6,7 +6,6 @@ import ChatbotSteps from "./ChatSteps";
 
 
 const ChatComponents = () => {
-
   const theme = {
     background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)',
     fontFamily: 'Helvetica Neue',
