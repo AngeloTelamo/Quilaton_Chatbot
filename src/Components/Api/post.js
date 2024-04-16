@@ -1,40 +1,34 @@
 import React, { Component } from 'react';
-import { collection, addDoc, serverTimestamp, doc, updateDoc } from '@firebase/firestore';
+import { collection, addDoc, serverTimestamp, doc, updateDoc, getDocs } from '@firebase/firestore';
 import { firestore } from '../../firebase';
 
-// Define a class component named Post
 class Post extends Component {
-  // Constructor to initialize state with values received from props
   constructor(props) {
     super(props);
 
-    // Destructure the steps prop to get Names, concern, and contact values
     const { steps } = this.props;
     const { Names, concern, contact } = steps;
 
-    // Initialize state with default values from props or empty strings
     this.state = {
       name: Names ? Names.value : '',
       concern: concern ? concern.value : '',
-      contact: contact ? contact.value : ''
+      contact: contact ? contact.value : '',
+      loading: false,
+      adminReplies: [],
+      clientUid: null, // Initialize clientUid state
     };
   }
 
-  // method called after the component is mounted
   componentDidMount() {
-    // Extract name, concern, and contact from state
     const { name, concern, contact } = this.state;
 
-    // If name and concern exist, save data to Firestore
     if (name && concern) {
       this.saveToFirestore(name, concern, contact);
     }
   }
 
-  // Method to save data to Firestore
   async saveToFirestore(name, concern, contact) {
     try {
-      // Add a document to the 'clients' collection in Firestore
       const docRef = await addDoc(collection(firestore, 'clients'), {
         name: name,
         concern: concern,
@@ -42,38 +36,82 @@ class Post extends Component {
         createdTime: serverTimestamp()
       });
 
-      // Get the ID of the newly added document
       const clientUid = docRef.id;
 
-      // Update the document with the clientUid
       await updateDoc(doc(firestore, 'clients', docRef.id), {
         clientUid: clientUid
       });
 
-      // Log success message with document ID
+      // Set the clientUid in state
+      this.setState({ clientUid: clientUid }, () => {
+        // After setting clientUid, fetch admin replies
+        this.fetchAdminReplies();
+      });
+
       console.log('Document written with ID: ', docRef.id);
     } catch (error) {
-      // Log error if document addition fails
       console.error('Error adding document: ', error);
     }
   }
 
-  // Render method to display content based on state values
+  async fetchAdminReplies() {
+    try {
+      this.setState({ loading: true });
+
+      const { name } = this.state;
+
+      if (!name) {
+        throw new Error('Client name is not set');
+      }
+
+      const messagesRef = collection(firestore, 'clients', name, 'messages');
+      const querySnapshot = await getDocs(messagesRef);
+
+      if (querySnapshot.empty) {
+        await new Promise(resolve => setTimeout(resolve, 5000)); 
+        return await this.fetchAdminReplies(); 
+      }
+      const adminReplies = [];
+      querySnapshot.forEach((doc) => {
+        adminReplies.push(doc.data().message);
+      });
+
+      console.log('Admin replies fetched:', adminReplies); // Log admin replies
+      this.setState({ adminReplies, loading: false });
+    } catch (error) {
+      console.error('Error fetching admin replies:', error);
+      this.setState({ loading: false });
+    }
+  }
+
   render() {
-    const { name, concern, contact } = this.state;
+    const { name, concern, contact, loading, adminReplies } = this.state;
 
     return (
       <div>
-        {/* Display a message thanking the user if name is present */}
-        {name ? `Thank you ${name}!` : 'Data received successfully!'} <br/>
-        {/* Display contact information if present */}
-        {contact ? `Your contact is ${contact}! was submitted successfully!` : 'Data received successfully!'} <br/>
-        {/* Display concern/message if present */}
-        {concern ? `Your concern/message: ${concern}` : ''}
+        {loading ? (
+          <p>Wait for reply...</p>
+        ) : (
+          <div>
+            {name ? `Thank you ${name}!` : 'Data received successfully!'} <br/>
+            {contact ? `Your contact is ${contact}! was submitted successfully!` : 'Data received successfully!'} <br/>
+            {concern ? `Your concern/message: ${concern}` : ''}
+
+            {adminReplies.length > 0 && (
+              <div>
+                <h2>Admin Replies:</h2>
+                <ul>
+                  {adminReplies.map((reply, index) => (
+                    <li key={index}>{reply}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
 }
 
-// Export the Post component as the default export of the module
 export default Post;
