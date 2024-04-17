@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { React } from 'react';
 import ChatBot from "react-simple-chatbot";
 import { ThemeProvider } from "styled-components"; 
-import { Segment, Popup } from 'semantic-ui-react'; // Import Popup from semantic-ui-react
+import { Segment } from 'semantic-ui-react'; // Import Popup from semantic-ui-react
 import ChatbotSteps from "./ChatSteps"; 
 
 
@@ -32,11 +32,9 @@ const ChatComponents = () => {
     marginRight: '5px',
   };
 
-  const [showTooltip, setShowTooltip] = useState(false);
+ 
 
-  const toggleTooltip = () => {
-    setShowTooltip(!showTooltip);
-  };
+ 
 
    return (
     <div style={{
@@ -50,15 +48,7 @@ const ChatComponents = () => {
       height: '100vh', 
     }}>
       <Segment>
-        <ThemeProvider theme={theme}>
-          <Popup
-            content="Chat with us"
-            backgroundColor = "#c0c0c0"
-            trigger={
-              <div
-                onMouseEnter={toggleTooltip}
-                onMouseLeave={toggleTooltip}
-              >
+        <ThemeProvider theme={theme}>            
                 <ChatBot 
                   headerTitle = {
                     <div>
@@ -73,13 +63,7 @@ const ChatComponents = () => {
                   userAvatar={require('../Components/AvatarProfile/Avatar.jpg')}
                   bubbleStyle={bubbleStyle}
                   parseText={true}
-                />
-              </div>
-            }
-            open={showTooltip}
-            position="left center" // Position the Popup message 
-            style={{ border: '1px solid #c0c0c0' }} //background color 
-          /> 
+                />          
         </ThemeProvider>
       </Segment>
     </div>

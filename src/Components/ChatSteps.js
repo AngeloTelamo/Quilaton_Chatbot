@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import messageSound from './AvatarProfile/tap.mp3';
 import Post from './Api/post';
-//import Get from './Api/get';
+import Get from './Api/get';
 
 const CustomComponent = ({ message }) => {
   const [messageSoundAudio, setMessageSoundAudio] = useState(null);
@@ -258,8 +258,31 @@ class ChatbotSteps extends React.Component {
           id: 'review',
           component: <Post />,
           asMessage: true,
-          end: true,
+          trigger: 'reply',
         },
+
+        {
+          id: 'reply',
+          message: 'Do you want to view the reply messages ?',
+          trigger: 'view-reply',
+        },
+
+        {
+          id: 'view-reply',
+          options:[
+           { value: 'Yes', label: "Yes", trigger: "Yes" },
+           { value: 'No', label: "No", trigger: "mains" },
+          ]
+        },
+
+        {
+          id: 'Yes',
+          component: <Get/>,
+          asMessage: true,
+          trigger: 'mains',
+        },
+
+
 
         // {
         //   id: 'end-message',
