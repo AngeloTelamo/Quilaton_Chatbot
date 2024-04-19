@@ -258,46 +258,8 @@ class ChatbotSteps extends React.Component {
           id: 'review',
           component: <Post />,
           asMessage: true,
-          trigger: 'reply',
-        },
-
-        {
-          id: 'reply',
-          message: 'Do you want to view the reply messages ?',
-          trigger: 'view-reply',
-        },
-
-        {
-          id: 'view-reply',
-          options:[
-           { value: 'Yes', label: "Yes", trigger: "Yes" },
-           { value: 'No', label: "No", trigger: "mains" },
-          ]
-        },
-
-        {
-          id: 'Yes',
-          component: <Get/>,
-          asMessage: true,
           trigger: 'mains',
         },
-
-
-
-        // {
-        //   id: 'end-message',
-        //   message: 'Thanks! Your data was submitted successfully!',
-        //   trigger: 'mains',
-        // },
-
-        // {
-        //   id: 'reply message',
-        //   component: <Get/>,
-        //   asMessage: true,
-        //   trigger: 'mains',
-        // },
-
-
 
       ];
       
