@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import messageSound from './AvatarProfile/tap.mp3';
 import Post from './Api/post';
-import Get from './Api/get';
+
 
 const CustomComponent = ({ message }) => {
   const [messageSoundAudio, setMessageSoundAudio] = useState(null);
