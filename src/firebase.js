@@ -9,13 +9,13 @@ import { getFirestore } from "firebase/firestore";
 //personal dev databse 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCFuuVYd0BoFtYJ6tIXNxT3eaBaOzhDqko",
-  authDomain: "chatbot-fc1e7.firebaseapp.com",
-  projectId: "chatbot-fc1e7",
-  storageBucket: "chatbot-fc1e7.appspot.com",
-  messagingSenderId: "589716993328",
-  appId: "1:589716993328:web:3ae6c30e016a4caaa044f5",
-  measurementId: "G-PEQW7DSNW8"
+  apiKey: "AIzaSyD14i99ALP0ihoNvMNNt4dfGH8epGCh98g",
+  authDomain: "quilaton-chatbot.firebaseapp.com",
+  projectId: "quilaton-chatbot",
+  storageBucket: "quilaton-chatbot.appspot.com",
+  messagingSenderId: "104233240385",
+  appId: "1:104233240385:web:31ca9007a06e176b6e83c0",
+  measurementId: "G-N8HHMNRBE1"
 };
 
 // Initialize Firebase
