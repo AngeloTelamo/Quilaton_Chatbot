@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Quilaton_Chatbot/static/css/main.a8647780.css",
-    "main.js": "/Quilaton_Chatbot/static/js/main.42f0b088.js",
+    "main.js": "/Quilaton_Chatbot/static/js/main.1afa19d1.js",
     "static/js/592.b3b07f54.chunk.js": "/Quilaton_Chatbot/static/js/592.b3b07f54.chunk.js",
     "static/media/Avatar.jpg": "/Quilaton_Chatbot/static/media/Avatar.53d38c256a41ab184ea2.jpg",
     "static/media/brand-icons.svg": "/Quilaton_Chatbot/static/media/brand-icons.6729d29753e000c17489.svg",
@@ -24,11 +24,11 @@
     "static/media/tap.mp3": "/Quilaton_Chatbot/static/media/tap.26371742bcb64f25256e.mp3",
     "index.html": "/Quilaton_Chatbot/index.html",
     "main.a8647780.css.map": "/Quilaton_Chatbot/static/css/main.a8647780.css.map",
-    "main.42f0b088.js.map": "/Quilaton_Chatbot/static/js/main.42f0b088.js.map",
+    "main.1afa19d1.js.map": "/Quilaton_Chatbot/static/js/main.1afa19d1.js.map",
     "592.b3b07f54.chunk.js.map": "/Quilaton_Chatbot/static/js/592.b3b07f54.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a8647780.css",
-    "static/js/main.42f0b088.js"
+    "static/js/main.1afa19d1.js"
   ]
 }
