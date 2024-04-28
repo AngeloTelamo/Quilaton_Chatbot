@@ -5,18 +5,14 @@ import { Segment, Popup } from 'semantic-ui-react'; // Import Popup from semanti
 import ChatbotSteps from "./ChatSteps"; 
 
 const ChatComponents = () => {
-  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
-  const [isHovered, setIsHovered] = useState(false); // State to track chatbot hover state
+  const [showPopup, setShowPopup] = useState(true); // State to control popup visibility
 
   useEffect(() => {
-
-    if (isHovered) {
-      setShowPopup(true);
-    } else {
+    const timer = setTimeout(() => {
       setShowPopup(false);
-    }
-    
-  }, [isHovered]);
+    }, 60000); // 20 seconds
+    return () => clearTimeout(timer);
+  }, []);
 
   const theme = {
     background: 'linear-gradient(to bottom, #f0f0f0, #c0c0c0)',
@@ -45,22 +41,17 @@ const ChatComponents = () => {
   };
 
   return (
-    <div 
-      style={{
-        position: 'fixed',
-        bottom: '-40%', 
-        left: '45%',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh', 
-      }}
-      onMouseEnter={() => setIsHovered(true)} // Set hover state to true when mouse enters chatbot area
-      onMouseLeave={() => setIsHovered(false)} // Set hover state to false when mouse leaves chatbot area
-    >
+    <div style={{
+      position: 'fixed',
+      bottom: '-40%', 
+      left: '45%',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh', 
+    }}>
       <Popup
-        hoverable
         open={showPopup}
         onClose={() => setShowPopup(false)}
         content="How can I help you?"

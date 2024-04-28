@@ -7,12 +7,13 @@ class Post extends Component {
     super(props);
 
     const { steps } = this.props;
-    const { Names, concern, contact } = steps;
+    const { Names, concern, contact, email } = steps; // Add email step
 
     this.state = {
       name: Names ? Names.value : '',
       concern: concern ? concern.value : '',
       contact: contact ? contact.value : '',
+      email: email ? email.value : '', // Initialize email state
       loading: false,
       adminReplies: [],
       clientUid: null, // Initialize clientUid state
@@ -20,19 +21,20 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    const { name, concern, contact } = this.state;
+    const { name, concern, contact, email } = this.state;
 
-    if (name && concern) {
-      this.saveToFirestore(name, concern, contact);
+    if (name && concern && email) {
+      this.saveToFirestore(name, concern, contact, email);
     }
   }
 
-  async saveToFirestore(name, concern, contact) {
+  async saveToFirestore(name, concern, contact, email) {
     try {
       const docRef = await addDoc(collection(firestore, 'clients'), {
         name: name,
         concern: concern,
         contact: contact,
+        email: email, // Add email field to Firestore document
         createdTime: serverTimestamp()
       });
 
@@ -50,10 +52,11 @@ class Post extends Component {
   }
 
   render() {
-    const { name, concern, contact } = this.state;
+    const { name, concern, contact, email } = this.state;
     return (
       <div>
         {name ? `Thank you ${name}!` : 'Data received successfully!'} <br/>
+        {email ? `Your email is ${email}!` : 'Data received successfully!'} <br/>
         {contact ? `Your contact is ${contact}! was submitted successfully!` : 'Data received successfully!'} <br/>
         {concern ? `Your concern/message: ${concern}` : ''} <br/>
 

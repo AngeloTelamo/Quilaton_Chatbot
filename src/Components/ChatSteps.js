@@ -221,17 +221,29 @@ class ChatbotSteps extends React.Component {
             }
             return true;
           },
-          trigger: 'writeConcern',
+          trigger: 'writeContacts',
         },
   
         {
-          id: 'writeConcern',
-          message: 'Please write your contact number and email:',
+          id: 'writeContacts',
+          message: 'Please write your contact number:',
           trigger: 'contact',
         },
         
         {
           id: 'contact',
+          user: true,
+          trigger: 'write_email',
+        },
+
+        {
+          id: 'write_email',
+          message: 'Please write your Email Information:',
+          trigger: 'email',
+        },
+        
+        {
+          id: 'email',
           user: true,
           trigger: 'write_Concern',
         },
